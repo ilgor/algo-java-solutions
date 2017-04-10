@@ -1,0 +1,67 @@
+import java.util.HashMap;
+
+public class Driver
+{
+    static HashMap<Integer, Long> mem = new HashMap<Integer, Long>();
+
+    public static long fib(int n)
+    {
+        if (mem.containsKey(n))
+        {
+            return mem.get(n);
+        } 
+        else if (n <= 2)
+        {
+            return 1;
+        } 
+        else
+        {
+            long f = fib(n - 1) + fib(n - 2);
+            mem.put(n, f);
+            return f;
+        }
+    } // end of fib
+
+    //********************************************************
+
+    public static void main(String[] args)
+    {
+        System.out.println(fib(10));
+        System.out.println(fib(20));
+        System.out.println(fib(1000));
+    } // end of main
+} // end of class
+
+
+
+-- OR --
+
+import java.util.LinkedHashMap;
+
+public class Driver
+{
+    public static void main(String[] args)
+    {
+        LinkedHashMap<Integer, Long> mem = new LinkedHashMap<Integer, Long>();
+        long fib;
+
+        int n = 1000;
+
+        for (int i = 1; i <= n; i++)
+        {
+            if (i <= 2)
+            {
+                fib = 1;
+            } 
+            else
+            {
+                fib = mem.get(i - 1) + mem.get(i - 2);
+            }
+            mem.put(i, fib);
+        } // end of for loop
+
+        System.out.println(mem.get(n));
+    } // end of main
+} // end of class
+
+

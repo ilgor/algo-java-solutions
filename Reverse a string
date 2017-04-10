@@ -1,0 +1,28 @@
+public class Driver
+{
+    public static void main(String[] args)
+    {
+        System.out.println(reverse("Ilgor"));
+        System.out.println(reverse(null));
+    } // end of main
+
+    public static String reverse(String s)
+    {
+        if (s == null)
+        {
+            return null;
+        }
+        int length = s.length();
+        int last = length - 1;
+        char[] chars = s.toCharArray();
+
+        for (int i = 0; i < length / 2; i++)
+        {
+            char temp = chars[i];
+            chars[i] = chars[last - i];
+            chars[last - i] = temp;
+        }
+        return new String(chars);
+    } // end of reverse
+} // end of class
+

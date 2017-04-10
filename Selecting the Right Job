@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Driver 
+{
+	public static void main(String[] args)
+	{
+		List<Movie> movies = new ArrayList<Movie>(); 
+				
+		movies.add(new Movie("Tarjan", 2, 6));
+		movies.add(new Movie("The president", 0, 4));
+		movies.add(new Movie("Descrete", 1, 3));
+		movies.add(new Movie("Halting state", 4, 8));
+		movies.add(new Movie("Steiner's Tree", 5, 10));
+		movies.add(new Movie("The Four Volume", 9, 15));
+		movies.add(new Movie("Programming Challange", 11, 14));
+		movies.add(new Movie("Process Terminated", 12, 22));
+		movies.add(new Movie("Calculated Bets", 15, 23));
+		
+		while (!movies.isEmpty())
+		{
+			removeCrossing(findSmallest(movies), movies);
+		}
+	} // end of main
+	
+	//***************************************************
+	
+	public static int findSmallest(List<Movie> m)
+	{
+		int smallest = Integer.MAX_VALUE;
+		int indexOfSmall = -1;
+		
+		for (int i=0; i<m.size();i++)
+		{
+			if (smallest > m.get(i).getEnd())
+			{
+				smallest = m.get(i).getEnd();
+				indexOfSmall = i;
+			}	
+		}
+		if (indexOfSmall != -1)
+		{
+			System.out.print(String.format("%-25s", m.get(indexOfSmall).getName()));
+			System.out.print(String.format("%4d", m.get(indexOfSmall).getStart()));
+			System.out.println(String.format("%4d", m.get(indexOfSmall).getEnd()));
+			m.remove(indexOfSmall);
+		}
+		return smallest;
+	} // end of findSmallest
+	
+	//***************************************************
+	
+	public static void removeCrossing(int end, List<Movie> m)
+	{
+		for (int i=0; i<m.size(); i++)
+		{
+			if (m.get(i).getStart() < end)
+			{
+				m.remove(i);
+				i--;
+			}
+		}
+	} // end of removeCrossing
+} // end class Driver
+
+//***************************************************
+
+class Movie
+{
+	private String name;
+	private int start;
+	private int end;
+	
+	public Movie(String name, int start, int end)
+	{
+		this.name = name;
+		this.start = start;
+		this.end = end;
+	} // end of constructor
+	
+	//**********************************************
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	//**********************************************
+	
+	public int getStart()
+	{
+		return start;
+	}
+	
+	//**********************************************
+	
+	public int getEnd()
+	{
+		return end;
+	}
+} // end class Movie

@@ -1,0 +1,66 @@
+public class ReverseList
+{
+    public static void main(String[] args)
+    {
+        List l = new List(1);
+        l.next = new List(2);
+        l.next.next = new List(3);
+        l.next.next.next = new List(4);
+
+        System.out.println(l.toString());
+        System.out.println(reverse(l).toString());
+    } // end of main
+
+    // ********************************************
+    
+    public static List reverse(List list)
+    {
+        if (list == null || list.next == null)
+        {
+            return list;
+        }
+
+        List remainingReverse = reverse(list.next);
+        List current = remainingReverse;
+
+        while (current.next != null)
+        {
+            current = current.next;
+        }
+
+        current.next = list;
+        list.next = null;
+
+        return remainingReverse;
+    } // end of reverse
+} // end of class
+
+//*************************************************
+
+class List
+{
+    int data;
+    List next;
+
+    public List(int data)
+    {
+        this.data = data;
+        next = null;
+    } // end of constructor
+
+    // *******************************************
+    
+    @Override
+    public String toString()
+    {
+        List current = this;
+        String total = "";
+
+        while (current != null)
+        {
+            total += current.data + "-->";
+            current = current.next;
+        }
+        return total + "TAIL";
+    } // end of toString
+} // end of List

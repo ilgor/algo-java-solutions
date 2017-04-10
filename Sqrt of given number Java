@@ -1,0 +1,49 @@
+public class Sqrt
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Sqrt of 50 is " + sqrt(50));
+    } // end of main
+
+    public static double sqrt(double a)
+    {
+        if (a < 0)
+        {
+            return -1;
+        }
+
+        if (a == 0 || a == 1)
+        {
+            return a;
+        }
+
+        double precision = 0.00001;
+        double start = 0;
+        double end = a;
+
+        if (a < 1)
+        {
+            end = 1;
+        }
+
+        while (end - start > precision)
+        {
+            double middle = (start + end) / 2;
+            double midSqrt = middle * middle;
+
+            if (midSqrt == a)
+            {
+                return middle;
+            } 
+            else if (midSqrt < a)
+            {
+                start = middle;
+            } 
+            else
+            {
+                end = middle;
+            }
+        } // end of while
+        return (start + end) / 2;
+    }
+} // end of class

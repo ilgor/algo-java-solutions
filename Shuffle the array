@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Driver
+{
+    public static void main(String[] args)
+    {
+        List<Integer> arr = new ArrayList<Integer>();
+
+        for (int i = -5; i < 6; i++)
+        {
+            arr.add(i);
+        }
+
+        int random;
+        int size = arr.size();
+
+        System.out.println(arr);
+
+        for (int i = 0; i < size; i++)
+        {
+            random = (int) ((size - i) * Math.random() + i);
+            shuffle(arr, i, random);
+        }
+        System.out.println(arr);
+    } // end of main
+    
+    //****************************************************************
+    
+    public static void shuffle(List<Integer> arr, int beg, int random)
+    {
+        int temp = arr.get(beg);
+        arr.set(beg, arr.get(random));
+        arr.set(random, temp);
+    }
+} // end of class

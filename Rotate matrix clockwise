@@ -1,0 +1,118 @@
+
+public class Matrix {
+	public static void main(String[] args) {
+		String[][] arr = {
+				{"1","2","3","4","5"},
+				{"a","b","c","d","e"},
+				{"m","n","o","p","q"},
+				{"?","&","#","$","%"},
+				{"w","x","y","z","s"}
+		};
+		rotate(arr, 360);
+	} // end of main
+	
+	// **************************************************************************
+	
+	private static void rotate(String[][] arr, int degree) {
+		int r = 0;
+		
+		while (Math.abs(degree) > 0) {
+			r = degree % 4;
+			degree /= 90;
+		}
+		
+		degree = (r < 0) ? 4 + r : r;
+
+		String arrNew[][] = null;
+		
+		for (int d=0; d<=degree; d++) {
+			if (arr.length == arr[0].length) {
+				arrNew = rotateNxN(arr);
+			}
+			else{
+				arrNew = rotateNxM(arr, degree);
+			}
+		}
+		display(arrNew);
+	}
+	
+	// **************************************************************************
+	
+	private static String[][] rotateNxN(String[][] arr) {
+		if (arr == null) {
+			System.err.println("Error: I can't rotate: Matrix is emty or size = 1 ");
+			return arr;
+		}
+		
+	    int size = arr.length - 1;
+	    for (int layer=0; layer<arr.length/2; layer++) {
+	    	for (int cell=layer; cell<size-layer; cell++) {
+	    		// saving top left
+	    		String topLeft = arr[layer][cell];
+	    		
+	    		// bottom left to top
+	    		arr[layer][cell] = arr[size - cell][layer];
+	    		
+	    		// bottom right to bottom left
+	    		arr[size - cell][layer] = arr[size - layer][size - cell];
+	    		
+	    		// top right to bottom right
+	    		arr[size - layer][size - cell] = arr[cell][size - layer];
+	    		
+	    		// top left to top right
+	    		arr[cell][size - layer] = topLeft;
+	    	}
+	    }
+	    return arr;
+	} // end of rotate
+	
+	private static String[][] rotateNxM(String[][] arr, int degree) {
+		String[][] arrNew = null;
+		int row =arr.length, col =arr[0].length;
+	
+		switch(degree) {
+			case 0:
+				arrNew = arr;
+				break;
+			case 1:
+				arrNew = new String[col][row];
+				for (int i=0; i<row; i++) {
+					for (int j=0; j<col; j++) {
+						arrNew[j][arr.length -1-i] = arr[i][j];
+					}
+				}
+				break;
+			case 2:
+				arrNew = new String[row][col];
+				for (int i=0; i<row; i++) {
+					for (int j=0; j<col; j++) {
+						arrNew[row-1-i][j] = arr[i][j];
+					}
+				}
+				break;
+			case 3:
+				arrNew = new String[col][row];
+				for (int i=0; i<row; i++) {
+					for (int j=0; j<col; j++) {
+						arrNew[j][i] = arr[i][j];
+					}
+				}
+				break;
+			default:
+				System.out.println("Something went wrong!");
+		}
+			
+		return arrNew;
+	}
+	
+	// **************************************************************************
+	
+	static void display(String[][] arr) {
+		for (int i=0; i<arr[0].length; i++) { System.out.print("----"); }
+		for (String[] ar : arr) { System.out.println(); for (String a: ar) { System.out.print(" " + a + " |"); }
+			System.out.println();
+			for (int i=0; i<ar.length; i++) { System.out.print("----"); }
+		}
+		System.out.println();
+	} // end of display
+} // end of class

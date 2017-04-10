@@ -1,0 +1,45 @@
+public class BitWiseCheck
+{
+    public static int checkIfGray(int a, int b)
+    {
+        if ((a ^ b) == 1)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    //    public static int grayDecode(int n)
+    //    {
+    //        int p = n;
+    //        while ((n >>>= 1) != 0)
+    //        {
+    //            p ^= n;
+    //        }
+    //        return p;
+    //    }
+    //
+    //    public static int grayEncode(int n)
+    //    {
+    //        return n ^ n >>> 1;
+    //    }
+    //
+    //    public static void main(String[] args)
+    //    {
+    //        System.out.println("i\tBinary\tGray\tDecoded");
+    //        for (int i = -1; i < 32; i++)
+    //        {
+    //            System.out.print(i + "\t");
+    //            System.out.print(Integer.toBinaryString(i) + "\t");
+    //            System.out.print(Integer.toBinaryString(grayEncode(i)) + "\t");
+    //            System.out.println(grayDecode(grayEncode(i)));
+    //        }
+    //    }
+    public static void main(String[] args)
+    {
+        int b = 3;
+        int a = 2;
+
+        System.out.println(checkIfGray(a, b));
+    }
+}
